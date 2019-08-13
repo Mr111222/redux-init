@@ -40,20 +40,21 @@ class Todolist extends Component {
     store.dispatch(action)
   }
   // 声明周期函数
-  async componentDidMount () {
-    let res= await axios.get('/api/all').then(res=>{
-      const action = {
-        type: 'axiosData',
-        data: res.data.data
-      }
-      store.dispatch(action)
-    })
+  componentDidMount () {
+    // 获取 TodolistUI 数据
+    const actionTodolistUI = actionsFn.getTodolistAllAction() // 调用actionCreations 里面的定义的方法
+    store.dispatch(actionTodolistUI)
+
+    // ul列表数据
+    const actionUi = actionsFn.getUlsAllAction() // 调用actionCreations 里面的定义的方法
+    store.dispatch(actionUi)
   }
 
 
   render() { 
     return ( 
       <div style={{marginLeft:'10px'}}>
+        {/* 抽出下面的ui结构封装为组件 */}
         <TodolistUI
           valves={this.state.inputValue}
           list={this.state.list}
@@ -61,16 +62,16 @@ class Todolist extends Component {
           addFn={this.addFn}
           delFn={this.delFn}
         ></TodolistUI>  
-
-       {/* <ul>
-          {this.state.listSql ? this.state.listSql.map((item,index)=>{
-              return(
-                  <li key={item.id}>
-                      {item.name}--{item.age}    
-                  </li>
-              )
-          }): ''}
-        </ul>         */}
+       {/* ul列表数据 */}
+       <ul>
+         <li>sql获取数据库数据渲染</li> 
+          {this.state.listSql 
+            ?
+            this.state.listSql.map(item => <li key={item.id}>{item.name}--{item.age}</li>)
+            : 
+            ''
+          }
+        </ul>        
        {/*   <Input
           placeholder={this.state.inputValue}
           style={{width:'250px', marginRight:'10px'}}

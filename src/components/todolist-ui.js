@@ -19,6 +19,9 @@ const TodolistUI = (props) => {
           bordered
           dataSource={props.list}
           renderItem={(item, index)=>(<List.Item  onClick={ () => {props.delFn(index)}}>{index+1}.{item}</List.Item>)}
+          // renderItem={(item, index)=>(<List.Item  onClick={ (index) => {props.delFn(index)}}>{index+1}.{item}</List.Item>)}
+          // 这里面不能再传入index 因为会与前面的index产生冲突
+
         >
         </List>
       </div> 
