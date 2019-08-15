@@ -74,4 +74,98 @@
   }
 
 
+### 使用注意点 propTypes
+    import PropTypes from 'prop-types'
+    class C extends Component {
+      render(){
+        return (
+          <div>
+            <p>{name}</p> 
+          </div>
+        )
+      }
+    }
+    // props 数据类型检测
+    C.propTypes = {
+      name: PropTypes.string.isRequired // string 指定类型  isRequired 必输项
+    }
+    // 设置默认参数
+    C.defaultProps = {
+      name: 'I am test html'
+    }
+    export default C
+
+### 使用注意点 ref
+
+class A extends Component {
+  render() {
+    return (
+      <div>
+        <input ref = {(input)=>{this.input = input}}/>
+        <p ref = {(p1) => {this.p = p1}}></p>
+        {/*<p ref = {(p1) =>  {this.p = p1}}></p>*/}
+        {/*         p1可自定义       p可自定义与后面获取元素时一致就行             */}
+        <button onClick={this.getHtmlVal.bind(this)}>getHtml</button>
+      </div>
+    )
+  }
+  getHtmlVal(){
+    console.log(this.input.value, this.p.innerHTML) // 注意点 ----> this.p.innerHTML 并不是this.p1.innerHTML
+  }
+}
+
+### 声明周期函数介绍
+  componentWillMount () {
+    console.log(`组件挂载之前---->componentWillMount`);
+  }
+  componentDidMount(){
+    console.log(`组件挂载完毕----->componentDidMount`);
+  }
+  shouldComponentUpdate (nextProps, nextState) { // 优化组件更新性能
+    console.log(`1组件更新之前执行 必须返回布尔值----->shouldComponentUpdate`)
+    if(nextPorps.content !== this.props.content){
+      return true
+    }else{
+      return false 
+    }
+    return true // 若此处返回值为false 则不继续往下执行
+  }
+  componentWillUpdate () {
+    console.log(`2组件更新之前执行 必须返回布尔值----->componentWillUpdate`)
+  }
+  componentDidUpdate () {
+    console.log(`4组件更新之前执行 必须返回布尔值----->componentDidUpdate`)
+  }
+  render() { 
+    console.log(`3组件挂载中------>render`)
+    return (
+      <div></div>
+    )
+  }
+
+  // 组件第一存在于dom中，函数不会执行
+  // 如果dom中已经存在，函数才会执行
+  componentWillReceiveProps() {
+
+  }
+
+
+
+  // 组件性能优化
+    shouldComponentUpdate (nextProps, nextState) { // 优化组件更新性能
+      console.log(`1组件更新之前执行 必须返回布尔值----->shouldComponentUpdate`)
+      if(nextPorps.content !== this.props.content){ 
+        return true
+      }else{
+        return false 
+      }
+      return true // 若此处返回值为false 则不继续往下执行
+  }
+
+
+
+
+
+
+
 
