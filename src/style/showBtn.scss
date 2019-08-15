@@ -1,0 +1,66 @@
+.showp{
+  animation: shows 1s ease forwards;
+}
+.hidep{
+  animation: hides 1s ease forwards;
+}
+
+@keyframes shows {
+  0%{
+    opacity: 0;
+    color:#ccc;
+  }
+  50%{
+    opacity: 0.5;
+    color:#666;
+  }
+  100%{
+    opacity: 1;
+    color:#111;
+  }
+}
+
+@keyframes hides {
+  0%{
+    opacity: 1;
+    color:#111;
+  }
+  50%{
+    opacity: 0.5;
+    color:#666;
+  }
+  100%{
+    opacity: 0;
+    color:#ccc;
+  }
+}
+
+// react-transion-group 指定class类 classNames = 'p-box'
+
+//enter是入场前的刹那（点击按钮），appear指页面第一次加载前的一刹那（自动）
+.p-box-enter, .p-box-appear {
+  opacity: 0;
+}
+//enter-active指入场后到入场结束的过程，appear-active则是页面第一次加载自动执行
+.p-box-enter-active, .p-box-appear-active { 
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+//入场动画执行完毕后，保持状态
+.p-box-enter-done {
+  opacity: 1;
+}
+//同理，出场前的一刹那，以下就不详细解释了，一样的道理
+.p-box-exit {
+  opacity: 1;
+}
+
+.p-box-exit-active {
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.p-box-exit-done {
+  opacity: 0;
+}
+
