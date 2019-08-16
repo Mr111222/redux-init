@@ -1,20 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {HashRouter as Router} from 'react-router-dom'
-import Todolist from './components/todolist'
-import Home from './components/home'
+import {Provider} from 'react-redux'
+import AppRouter from './appRouter'
+import store from './store'
 
 //globe css
 import './style/index.styl'
-import './style/less.less'
-import './style/sass.sass'
 import './style/scss.scss'
 import './style/showBtn.scss'
 
+const App = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+)
 
 
 ReactDOM.render(
-  <Router>
-    <Home/>
-  </Router>  
+  App
 , document.getElementById('app'));

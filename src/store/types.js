@@ -4,6 +4,7 @@ const change_Inp = 'CHANGEINP'
 const get_list = 'GETLIST'
 const get_listAll = 'GETLISTALL'
 const get_ul = 'GETUL'
+const del_sql_list= 'DELSQLLIST'
 
 export {
   add_List,
@@ -11,5 +12,6 @@ export {
   change_Inp,
   get_list,
   get_listAll,
-  get_ul
+  get_ul,
+  del_sql_list
 }
